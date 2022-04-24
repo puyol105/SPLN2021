@@ -1,0 +1,27 @@
+<DIV align=center CLASS=head1>
+Justino Feio Vale Antunes Guimarães
+</DIV>
+<div align="center"> * Guimarães, Donim, Casa de Sande  <nobr>10.03.1933</nobr> </div>
+
+<div class="marcadorP" style="margin-top: 10px;">Pais</div><DIV CLASS=txt2 ALIGN=center>
+
+	<div align=center><B>Pai:</B> <A HREF=pessoas.php?id=1075916> José Martins de Oliveira Antunes Guimarães</A> *  <nobr>27.04.1904</nobr></div><div align=center><B>Mãe:</B> <A HREF=pessoas.php?id=1075918> Maria Fernanda de Amorim Feio Vale</A> *  <nobr>04.09.1912</nobr></div><div class="marcadorP" style="margin-top: 10px;">Casamentos</div><div align="center"><B>Casamento I:</B> </div><div align="center" style="margin-bottom: 15px;"><A href=pessoas.php?id=1075944> Maria Adelaide Rodrigues Pais dos Santos</A> *  <nobr>14.05.1943</nobr></div><div align="center"><B>Casamento II:</B>   Braga, Cividade  <nobr>19.01.1979</nobr></div><div align="center" style="margin-bottom: 15px;"><A href=pessoas.php?id=1076050> Maria Clotilde Miranda Cardoso do Vale</A> *  <nobr>19.01.1940</nobr></div>
+		</div>
+		<div class="txt2"
+	><div class="marcadorP" style="margin-top: 10px;">Filhos</div>
+				<div style="margin-top: 5px;"><b>Filhos do Casamento I:</b></div><ul style="margin-top: 5px;"><LI><A HREF=pessoas.php?id=1075943> Ana Maria Pais dos Santos Antunes Guimarães</A> *  <nobr>16.05.1963</nobr> </LI>
+
+
+					def extract_info_alter(page):
+    print(type(page))
+    #p1, *sec_cont = re.split(r'<div\s+class="marcadorP".*?>(.*?)</div>', page)
+    blocos = re.split(r'<div\s+class="marcadorP".*?>(.*?)</div>', page)
+    
+    if nome := re.findall(r'<title>([\w \-]+)</title>', blocos[0]):
+        print("NOME:",nome[0])
+    for bloco in blocos:
+        print('---------------bloco: ', bloco)
+        familiares = re.findall(r'<a\s+href=(.*?id=(\d+)"?)>(.*?)</a>', bloco)
+        #print('familiares', familiares)
+        for url,ids,nome in familiares:
+            print(f"{ids}==> {nome} {nome.strip()}")
